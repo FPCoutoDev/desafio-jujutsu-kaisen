@@ -52,7 +52,7 @@ function ataquePersonagem(atacantes, atacado ){
         }
 
     if(atacantes.magia === "GENJUTSU"){
-        damage= Math.random() * magiaDamage.dano
+        damage= (Math.random() * magiaDamage.dano).toFixed(0)
         if(damage === magiaDamage.danoMaximo){
             console.log("DANO CRITICO!")}
         }
@@ -60,17 +60,20 @@ function ataquePersonagem(atacantes, atacado ){
     console.log(`O ${atacantes.classe} ${atacantes.nome} atacou ${atacado.nome} com ${magiaDamage.nome}, causando ${damage} de pontos de vida.`)
 atacado.vida -= damage
 
-if(atacantes.magia === "AMATERASU"){
+if (atacantes.magia === "AMATERASU") {
     console.log(`${atacado.nome} está em chamas!`);
-    for(var i = 0; i < 8; i++){
-        if( i % 2 === 0){
-        atacado.vida -= 15
-        if(atacado.vida <= 0){
-            atacado.vida = 0
-            console.log(`${atacado.nome} não resistiu e foi abatido por ${atacantes.nome}`)}
-            else{ console.log(`${atacado.nome} está queimando e perdeu 15 de vida! Vida restante: ${atacado.vida}`)
+    for (let i = 0; i < 4; i++) {
+        setTimeout(() => {
+            if (atacado.vida > 0) {
+                atacado.vida -= 15;
+                if (atacado.vida <= 0) {
+                    atacado.vida = 0;
+                    console.log(`${atacado.nome} não resistiu e foi abatido por ${atacantes.nome}`);
+                } else {
+                    console.log(`${atacado.nome} está queimando e perdeu 15 de vida! Vida restante: ${atacado.vida}`);
+                }
             }
-        }
+        }, i * 2000);
     }}
     else{ if(atacado.vida <= 0){
         atacado.vida = 0
