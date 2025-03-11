@@ -13,7 +13,7 @@ const magiasPermitidas = {
 const habilidades = {
     INFINITO: {nome: "infinity Void", dano: 999},
     VESSEL: {nome: "Malevont Shrine", dano: 50},
-    RIKA: {nome: "Authentic Mutual Love", danoMinimo: 20, danoMaximo:80},
+    RIKA: {nome: "Authentic Mutual Love", danoMinimo: 20, danoMaximo:160},
     CHIDORI: {nome: "Chidori Kirin", dano: 99},
     RASENGAN: {nome: "Rasen Shuriken", dano: 100},
     GENJUTSU: {nome: "Genjutsu", dano: 100},
@@ -59,12 +59,27 @@ function ataquePersonagem(atacantes, atacado ){
 
     console.log(`O ${atacantes.classe} ${atacantes.nome} atacou ${atacado.nome} com ${magiaDamage.nome}, causando ${damage} de pontos de vida.`)
 atacado.vida -= damage
-    if(atacado.vida <= 0){
+
+if(atacantes.magia === "AMATERASU"){
+    console.log(`${atacado.nome} está em chamas!`);
+    for(var i = 0; i < 8; i++){
+        if( i % 2 === 0){
+        atacado.vida -= 15
+        if(atacado.vida <= 0){
+            atacado.vida = 0
+            console.log(`${atacado.nome} não resistiu e foi abatido por ${atacantes.nome}`)}
+            else{ console.log(`${atacado.nome} está queimando e perdeu 15 de vida! Vida restante: ${atacado.vida}`)
+            }
+        }
+    }}
+    else{ if(atacado.vida <= 0){
         atacado.vida = 0
         console.log(`${atacado.nome} não resistiu e foi abatido por ${atacantes.nome}`)}   
     else {console.log(`${atacado.nome} agora tem ${atacado.vida} de vida restante.`) 
    }
+    }
 }
+
 let firstCharacter = new Personagens(classes.FEITICEIRO, "Satoro Gojo", "INFINITO", 140)
 let secondCharacter = new Personagens(classes.FEITICEIRO, "Sukuna", 'VESSEL', 150 )
 let thirdCharacter = new Personagens(classes.FEITICEIRO, "Yuta Okkotsu", "RIKA", 130)
@@ -73,9 +88,9 @@ let fifthCharacter = new Personagens(classes.NINJAS, "Naruto Uzumaki", "RASENGAN
 let sixthCharacter = new Personagens(classes.NINJAS, "Sakura", "GENJUTSU", 110);
 let seventhCharacter = new Personagens(classes.UCHIHAS, "SASUKE", "AMATERASU", 150);
 let eighthCharacter = new Personagens(classes.UCHIHAS, "SHISUI", "KOTOAMATSUKAMI", 110);
-let ninthCharacter = new Personagens(classes.UCHIHAS, "MADARA", "CHIDORI", 200);
+let ninthCharacter = new Personagens(classes.UCHIHAS, "MADARA", "SUSANOO", 200);
 console.log("//////////////////////////////////////////////////////")
-ataquePersonagem(thirdCharacter, secondCharacter)
+ataquePersonagem(seventhCharacter, secondCharacter)
 console.log("//////////////////////////////////////////////////////")
 ataquePersonagem(eighthCharacter, ninthCharacter)
 console.log("//////////////////////////////////////////////////////")
